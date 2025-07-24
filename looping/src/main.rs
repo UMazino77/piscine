@@ -8,7 +8,7 @@ fn main() {
         io::stdin()
             .read_line(&mut riddle)
             .expect("Failed to read input");
-        if riddle == "The letter e" {
+        if riddle.trim() == "The letter e" {
             println!("Number of trials: {i}");
             break ;
         }
