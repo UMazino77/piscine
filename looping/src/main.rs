@@ -7,7 +7,7 @@ fn main() {
             .read_line(&mut riddle)
             .expect("Failed to read input");
         if riddle == "The letter e" {
-            println!(Number of trials: {i});
+            println!("Number of trials: {i}");
             break ;
         }
         i+=1;
