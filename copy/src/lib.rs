@@ -9,7 +9,7 @@ pub fn str_function(a: String) -> (String, String) {
     for cc in c  {
         let mut d: f64 = cc.parse().expect("error");
         d = d.exp();
-        s = format!("{} {} ",s,d.to_string());
+        s = format!("{} {}",s,d.to_string());
     }
     (a, s.trim().to_string())
 }
