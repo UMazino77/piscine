@@ -4,6 +4,6 @@ fn main() {
     println!("{}", is_empty(""));
     println!("{}", is_ascii("rust"));
     println!("{}", contains("rust", "ut"));
-    println!("{:?}", split_at("rust", 3));
+    println!("{:?}", split_at("rust", 12));
     println!("{}", find("rust", 'u'));
 }
