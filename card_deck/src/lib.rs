@@ -1,4 +1,8 @@
 pub enum Suit {
+    Heart,
+    Diamond,
+    Spade,
+    Club
 }
 
 pub enum Rank {
