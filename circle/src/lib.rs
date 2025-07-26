@@ -27,22 +27,22 @@ impl Circle {
     }
 
     pub fn area(&self) -> f64 {
-        2.0*self.radius*PI
+        self.radius.powf(2.0)*PI
     }
 
     pub fn intersect(&self, other: Circle) -> bool {
-        self.center.distance(other.center) <= maxx(self.radius, other.radius)
+        self.center.distance(other.center) <= self.radius+other.radius
     }
 }
 
-pub fn maxx(a: f64,b :f64)-> f64 {
-    /*to get the largest radius and compare it to the distance between the two circles */
+// pub fn maxx(a: f64,b :f64)-> f64 {
+//     /*to get the largest radius and compare it to the distance between the two circles */
 
-    if a >= b {
-        return a;
-    }
-    b
-}
+//     if a >= b {
+//         return a;
+//     }
+//     b
+// }
 
 /*
 
