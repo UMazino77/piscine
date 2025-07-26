@@ -30,7 +30,27 @@ impl Circle {
         2.0*self.radius*PI
     }
 
-    // fn intersect(&self, other: &Circle) -> u32 {
-    //     todo!()
-    // }
+    pub fn intersect(&self, other: Circle) -> bool {
+        self.center.distance(other.center) <= maxx(self.radius, other.radius)
+    }
 }
+
+pub fn maxx(a: f64,b :f64)-> f64 {
+    /*to get the largest radius and compare it to the distance between the two circles */
+
+    if a >= b {
+        return a;
+    }
+    b
+}
+
+/*
+
+(x-x0)2 + (y-y0)2 = r2
+(x-x1)2 + (y-y1)2 = rr2
+
+2x(x1-x0) +x12 + 2y(y1-y0) + y12 = r2-rr2
+
+x(x1-x0) + y(y1-y0) = (r2-rr2 - x12 - y12)/2
+
+*/

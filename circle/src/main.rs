@@ -11,10 +11,10 @@ fn main() {
     println!("circle = {:?} area = {}", circle, circle.area());
     println!("circle = {:?} diameter = {}", circle, circle.diameter());
     println!("circle1 = {:?} diameter = {}", circle1, circle1.diameter());
-    // println!(
-    //     "circle and circle1 intersect = {}",
-    //     circle.intersect(circle1)
-    // );
+    println!(
+        "circle and circle1 intersect = {}",
+        circle.intersect(circle1)
+    );
 
     println!(
         "distance between {:?} and {:?} is {}",
