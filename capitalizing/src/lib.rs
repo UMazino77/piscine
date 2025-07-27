@@ -1,23 +1,48 @@
 pub fn capitalize_first(input: &str) -> String {
+    if input.is_empty() {
+        return String::new()
+    }
     let mut sss: Vec<_> = input.to_owned().chars().collect();
     sss[0] = sss[0].to_uppercase().nth(0).expect("error");
     sss.into_iter().collect()
 }
 
 pub fn title_case(input: &str) -> String {
+    if input.is_empty() {
+        return String::new()
+    }
     let b = input.to_owned();
     let c: Vec<_> = b.split_whitespace().into_iter().collect();
     let mut cc: Vec<_> = vec![];
+    let mut i = 0;
+    // let mut j = 0;
+    let mut vect: Vec<_> = vec![];
+    for il in b.chars() {
+        if il.is_whitespace() {
+            vect.push(il.to_string());
+            // j+=1;
+        }
+    }
+    // println!("{}   === >>>> {}", j, c.len());
+
     for inp in &c {
         // println!("{} ===> {}", inp,capitalize_first(inp));
-        cc.push(capitalize_first(inp));
+        if i == c.len()-1 {
+            cc.push(capitalize_first(inp));
+            continue;
+        }
+        cc.push(capitalize_first(inp)+vect[i].as_str());
+        i+=1;
     }
-    cc.join(" ")
+    cc.concat()
 }
 
 pub fn change_case(input: &str) -> String {
+    if input.is_empty() {
+        return String::new()
+    }
     let a = input.to_owned();
-    let b: Vec<_> = a.split(" ").into_iter().collect();
+    let b: Vec<_> = a.split_whitespace().into_iter().collect();
     let mut dd: Vec<String> = vec![];
     for inp in b {
         let ccc = inp.to_string();
@@ -34,6 +59,5 @@ pub fn change_case(input: &str) -> String {
 
         dd.push(ff.collect());
     }
-
     dd.join(" ")
 }
