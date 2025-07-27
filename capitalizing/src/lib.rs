@@ -15,29 +15,19 @@ pub fn title_case(input: &str) -> String {
     let c: Vec<_> = b.split(|c| c == ' ' || c == '\t' ).into_iter().collect();
     let mut cc: Vec<_> = vec![];
     let mut i = 0;
-    // let mut j = 0;
     let mut vect: Vec<_> = vec![];
     for il in b.chars() {
         if il.is_whitespace() {
             vect.push(il.to_string());
-            // j+=1;
         }
     }
 
-    println!("{:?}",c);
-    // println!("{}   === >>>> {}", j, c.len());
-
     for inp in &c {
-        // println!("{} ===> {}", inp,capitalize_first(inp));
         if i >= c.len()-1 {
             cc.push(capitalize_first(inp));
-            continue;
         } else {
             cc.push(capitalize_first(inp)+vect[i].as_str());
         }
-
-        // println!("{} ====> {}", capitalize_first(inp), vect[i]);
-
         i+=1;
     }
     cc.concat()
