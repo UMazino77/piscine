@@ -6,7 +6,7 @@ pub fn capitalize_first(input: &str) -> String {
 
 pub fn title_case(input: &str) -> String {
     let b = input.to_owned();
-    let c: Vec<_> = b.split(" ").into_iter().collect();
+    let c: Vec<_> = b.split_whitespace().into_iter().collect();
     let mut cc: Vec<_> = vec![];
     for inp in &c {
         // println!("{} ===> {}", inp,capitalize_first(inp));
