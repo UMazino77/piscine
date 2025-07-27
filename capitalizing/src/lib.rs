@@ -12,7 +12,7 @@ pub fn title_case(input: &str) -> String {
         return String::new()
     }
     let b = input.to_owned();
-    let c: Vec<_> = b.split_whitespace().into_iter().collect();
+    let c: Vec<_> = b.split(|c| c == ' ' || c == '\t' ).into_iter().collect();
     let mut cc: Vec<_> = vec![];
     let mut i = 0;
     // let mut j = 0;
@@ -23,19 +23,31 @@ pub fn title_case(input: &str) -> String {
             // j+=1;
         }
     }
+
+    println!("{:?}",c);
     // println!("{}   === >>>> {}", j, c.len());
 
     for inp in &c {
         // println!("{} ===> {}", inp,capitalize_first(inp));
-        if i == c.len()-1 {
+        if i >= c.len()-1 {
             cc.push(capitalize_first(inp));
             continue;
+        } else {
+            cc.push(capitalize_first(inp)+vect[i].as_str());
         }
-        cc.push(capitalize_first(inp)+vect[i].as_str());
+
+        // println!("{} ====> {}", capitalize_first(inp), vect[i]);
+
         i+=1;
     }
     cc.concat()
 }
+
+
+
+/*
+    split saves extra spaces for exmpl split_whitespace rmoves them
+*/
 
 pub fn change_case(input: &str) -> String {
     if input.is_empty() {
