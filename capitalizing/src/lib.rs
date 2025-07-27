@@ -38,5 +38,5 @@ pub fn change_case(input: &str) -> String {
         dd.push(ff);
     }
 
-    dd.concat()
+    dd.join(" ")
 }
