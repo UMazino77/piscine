@@ -22,9 +22,7 @@ pub fn change_case(input: &str) -> String {
     for inp in b {
         let ccc = inp.to_string();
         let l: Vec<_> = ccc.chars().collect();
-        let ff: String = l
-            .into_iter()
-            .map(|c| {
+        let ff = l.into_iter().map(|c| {
                 if c.is_ascii_lowercase() {
                     c.to_ascii_uppercase()
                 } else if c.is_ascii_uppercase() {
@@ -32,10 +30,9 @@ pub fn change_case(input: &str) -> String {
                 } else {
                     c
                 }
-            })
-            .collect();
+            });
 
-        dd.push(ff);
+        dd.push(ff.collect());
     }
 
     dd.join(" ")
