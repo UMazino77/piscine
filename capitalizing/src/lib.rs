@@ -6,8 +6,8 @@ pub fn capitalize_first(input: &str) -> String {
 
 pub fn title_case(input: &str) -> String {
     let b = input.to_owned();
-    let c : Vec<_>= b.split(" ").into_iter().collect();
-    let mut cc : Vec<_> = vec![];
+    let c: Vec<_> = b.split(" ").into_iter().collect();
+    let mut cc: Vec<_> = vec![];
     for inp in &c {
         // println!("{} ===> {}", inp,capitalize_first(inp));
         cc.push(capitalize_first(inp));
@@ -15,9 +15,28 @@ pub fn title_case(input: &str) -> String {
     cc.join(" ")
 }
 
-pub fn change_case(_input: &str) -> String {
+pub fn change_case(input: &str) -> String {
     let a = input.to_owned();
-    let b = a.split(" ").into_iter().collect();
-    
-    todo!()
+    let b: Vec<_> = a.split(" ").into_iter().collect();
+    let mut dd: Vec<String> = vec![];
+    for inp in b {
+        let ccc = inp.to_string();
+        let l: Vec<_> = ccc.chars().collect();
+        let ff: String = l
+            .into_iter()
+            .map(|c| {
+                if c.is_ascii_lowercase() {
+                    c.to_ascii_uppercase()
+                } else if c.is_ascii_uppercase() {
+                    c.to_ascii_lowercase()
+                } else {
+                    c
+                }
+            })
+            .collect();
+
+        dd.push(ff);
+    }
+
+    dd.concat()
 }
