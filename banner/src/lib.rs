@@ -30,7 +30,7 @@ impl FlagsHandler {
         if argv.len() <= 1 {
             return Err("error".to_string());
         }
-       aa(argv[0], argv[1]).map_err(|e| format!("Error : {}", e))
+       aa(argv[0], argv[1]).map_err(|e| format!("{}",e))
     }
 }
 
