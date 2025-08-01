@@ -31,7 +31,7 @@ impl Form {
             let a = FormError::new("name", "".to_owned() , "Username is empty");
             return Err(a); 
         } else if self.password.len() < 8 {
-            let a = FormError::new("name", self.password.clone()  , "Password should be at least 8 characters long");
+            let a = FormError::new("password", self.password.clone()  , "Password should be at least 8 characters long");
             return Err(a);
         } 
         let _ = self.password.chars().for_each(|x| {
