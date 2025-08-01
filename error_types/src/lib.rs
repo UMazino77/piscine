@@ -44,7 +44,7 @@ impl Form {
             }
         });
         if !a || !b || !c {
-            let a = FormError::new("name", self.password.clone() , "Password should be a combination of ASCII numbers, letters and symbols");
+            let a = FormError::new("password", self.password.clone() , "Password should be a combination of ASCII numbers, letters and symbols");
             return Err(a);
         }
         Ok(())
