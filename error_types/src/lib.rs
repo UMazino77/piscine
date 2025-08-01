@@ -1,16 +1,18 @@
-use::chrono::Local ;
+use::chrono::Utc ;
+
+
 #[derive(Debug, Eq, PartialEq, Clone)]
 pub struct FormError<'a> {
     pub form_values : (&'a str, String) ,
     pub date : String ,
-    pub err : String,
+    pub err : &'a str,
 }
 
 impl FormError <'_> {
     pub fn new(field_name: &'static str, field_value: String, err: &'static str) -> Self {
-        let now = Local::now();
+        let now = Utc::now();
 
-        FormError{form_values :(field_name, field_value), date : now.format("%Y-%m-%d %H:%M:%S").to_string(), err : err.to_string()}
+        FormError{form_values :(field_name, field_value), date : now.format("%Y-%m-%d %H:%M:%S").to_string(), err : err}
     }
 }
 
