@@ -1,6 +1,5 @@
-workspace = { members = ["boxing_todo"] }
 [package]
-name = "error_types"
+name = "middle_day"
 version = "0.1.0"
 edition = "2021"
 
