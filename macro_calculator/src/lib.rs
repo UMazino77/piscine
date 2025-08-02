@@ -21,11 +21,17 @@ pub fn calculate_macros(foods: &[Food]) -> json::JsonValue {
         proteins += food.proteins * food.nbr_of_portions ;
         fats += food.fats * food.nbr_of_portions ;
     }
+
+    cals = helper(cals).parse().expect("error");
+    carbs = helper(carbs).parse().expect("error");
+    proteins = helper(proteins).parse().expect("error");
+    fats = helper(fats).parse().expect("error");
     
-    data["cals"] = helper(cals).into();
-    data["carbs"] = helper(carbs).into();
-    data["proteins"] = helper(proteins).into();
-    data["fats"] = helper(fats).into();
+    
+    data["cals"] = cals.into();
+    data["carbs"] = carbs.into();
+    data["proteins"] = proteins.into();
+    data["fats"] = fats.into();
 
     data
 
@@ -34,5 +40,5 @@ pub fn calculate_macros(foods: &[Food]) -> json::JsonValue {
 fn helper(num: f64) -> String {
     let aa = format!("{:.2}", num);
     let bb = aa.trim_end_matches('0').trim_end_matches('.');
-    if bb.is_empty() { "0".to_string() } else { bb.to_string() }
+    if bb.is_empty() { "0".to_string() } else { bb.to_owned()}
 }
