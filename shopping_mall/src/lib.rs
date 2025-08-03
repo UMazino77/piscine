@@ -3,7 +3,7 @@ pub use mall::* ;
 use std::collections::HashMap;
 
 
-pub fn biggest_store(mall : &Mall) -> (&str, Store) {
+pub fn biggest_store(mall : &Mall) -> (&str, &Store) {
     let mut max_area = 0;
     let mut name = String::new() ;
     let aa : HashMap<String, Employee> = Default::default() ;
@@ -12,8 +12,8 @@ pub fn biggest_store(mall : &Mall) -> (&str, Store) {
         for (key,store) in &floor.stores {
             if store.square_meters >= max_area {
                 max_area = store.square_meters.clone();
-                strr = Some(store)  ;
-                name = (*key.clone()).to_owned() ;
+                strr = Some(&store)  ;
+                name = (*key.clone()) ;
             }
         }
     }
