@@ -1,22 +1,23 @@
-use std::collections::HashMap;
 
 pub fn edit_distance(source: &str, target: &str) -> usize {
-    rec(source.as_bytes(), target.as_bytes(), 0, 0, &mut HashMap::new())
+    let (a, b): (Vec<_>, Vec<_>) = (source.chars().collect(), target.chars().collect());
+    let (c, d) = (a.len(), b.len());
+    let mut res = vec![vec![0; d + 1]; c + 1];
+    
+    for i in 0..=c { res[i][0] = i; }
+    for j in 0..=d { res[0][j] = j; }
+    
+    for i in 1..=c {
+        for j in 1..=d {
+            res[i][j] = if a[i-1] == b[j-1] {
+                res[i-1][j-1]
+            } else {
+                1 + [res[i-1][j], res[i][j-1], res[i-1][j-1]].iter().min().unwrap()
+            };
+        }
+    }
+    res[c][d]
 }
 
-pub fn rec(s: &[u8],t: &[u8],i: usize, j: usize,m: &mut HashMap<(usize, usize), usize>) -> usize {
-    if let Some(&r) = m.get(&(i, j)) {
-        return r;
-    }
-    let r ;
-    if i == s.len() {
-        r = t.len() - j;
-    } else if j == t.len() {
-        r = s.len() - i;
-    } else if s[i] == t[j] {
-        r = rec(s, t, i + 1, j + 1, m);
-    } else {
-        r = 1 +[rec(s, t, i + 1, j, m), rec(s, t, i, j + 1, m), rec(s, t, i + 1, j + 1, m)].iter().min().unwrap()
-    };
-    r
-}
+
+
