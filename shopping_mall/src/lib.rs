@@ -7,7 +7,7 @@ pub fn biggest_store(mall : &Mall) -> (&str, Store) {
     let mut max_area = 0;
     let mut name = String::new() ;
     let aa : HashMap<String, Employee> = Default::default() ;
-    let mut strr = Store::new(aa, 0);
+    let mut strr = None;
     for floor in mall.floors.values(){
         for (key,store) in &floor.stores {
             if store.square_meters >= max_area {
@@ -18,7 +18,7 @@ pub fn biggest_store(mall : &Mall) -> (&str, Store) {
         }
     }
 
-    (name,strr.unwrap())
+    (&name,strr.unwrap())
 }
 
 pub fn highest_paid_employee(mall : &Mall) -> Vec<(&str,Employee)> {
