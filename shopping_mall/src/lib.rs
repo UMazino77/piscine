@@ -3,35 +3,37 @@ pub use mall::* ;
 use std::collections::HashMap;
 
 
-pub fn biggest_store(mall : &Mall) -> Store {
+pub fn biggest_store(mall : &Mall) -> (String, Store) {
     let mut max_area = 0;
+    let mut name = String::new() ;
     // let empl = Employee {age: 0, working_hours: (0, 0),  salary: 0.0};
     let aa : HashMap<String, Employee> = Default::default() ;
     let mut strr = Store::new(aa, 0);
     for floor in mall.floors.values(){
-        for store in floor.stores.values() {
+        for (key,store) in &floor.stores {
             if store.square_meters >= max_area {
                 max_area = store.square_meters;
                 strr = store.clone()  ;
+                name = (*key.clone()).to_owned() ;
             }
         }
     }
 
-    strr
+    (name,strr)
 }
 
-pub fn highest_paid_employee(mall : &Mall) -> Vec<Employee> {
+pub fn highest_paid_employee(mall : &Mall) -> Vec<(String,Employee)> {
     let mut max = f64::MIN;
-    let mut bb : Vec<Employee> = vec![] ;
+    let mut bb : Vec<(String,Employee)> = vec![] ;
     for floor in mall.floors.values(){
         for store in floor.stores.values() {
-            for empl in store.employees.values() {
+            for (key,empl) in &store.employees {
                 if empl.salary >= max {
                     if empl.salary == max {
-                        bb.push(*empl) ;
+                        bb.push(((*key.clone()).to_owned() ,*empl)) ;
                     } else {
                         bb.clear() ;
-                        bb.push(*empl) ;
+                        bb.push(((*key.clone()).to_owned(), *empl)) ;
                     }
                     max = empl.salary;
                 }
