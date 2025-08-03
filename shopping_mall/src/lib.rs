@@ -11,7 +11,7 @@ pub fn biggest_store(mall : &Mall) -> (String, Store) {
     for floor in mall.floors.values(){
         for (key,store) in &floor.stores {
             if store.square_meters >= max_area {
-                max_area = store.square_meters;
+                max_area = store.square_meters.clone();
                 strr = store.clone()  ;
                 name = (*key.clone()).to_owned() ;
             }
@@ -34,7 +34,7 @@ pub fn highest_paid_employee(mall : &Mall) -> Vec<(String,Employee)> {
                         bb.clear() ;
                         bb.push(((*key.clone()).to_owned(), *empl)) ;
                     }
-                    max = empl.salary;
+                    max = empl.salary.clone();
                 }
             }
         }
@@ -58,7 +58,7 @@ pub fn check_for_securities(mall :  &mut Mall,guards :HashMap<String, Guard>) ->
     let mut area = 0;
     for floor in mall.floors.values(){
         for store in floor.stores.values() {
-            area += store.square_meters ;
+            area += store.square_meters.clone() ;
         }
     }
     if area / (nb as u64) < 200 {
