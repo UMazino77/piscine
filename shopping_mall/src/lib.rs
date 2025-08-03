@@ -53,7 +53,7 @@ pub fn nbr_of_employees(mall : &Mall, ) -> usize {
     a + mall.guards.len()
 }
 
-pub fn check_for_securities(mall :  &Mall,mut guards :HashMap<String, Guard>) -> usize {
+pub fn check_for_securities(mall :  &mut Mall,mut guards :HashMap<String, Guard>) -> usize {
     let nb = guards.len();
     let mut area = 0;
     for floor in mall.floors.values(){
@@ -62,7 +62,7 @@ pub fn check_for_securities(mall :  &Mall,mut guards :HashMap<String, Guard>) ->
         }
     }
     if area / (nb as u64) < 200 {
-        guards.insert("mohamed".to_owned(), Guard{age : 22 , years_experience : 1});
+        mall.hire_guard("mohamed atmani", Guard{age: 22 , years_experience : 1}) ;
         return nb+1 ;
     }
     nb
@@ -73,9 +73,9 @@ pub fn cut_or_raise( mall : &mut Mall) -> usize {
         for store in floor.stores.values_mut() {
             for empl in store.employees.values_mut() {
                 if empl.working_hours.1-empl.working_hours.0 >= 10 {
-                    empl.salary = empl.salary + empl.salary/10.0 ;
+                    empl.raise(empl.salary/10.0) ;
                 } else {
-                    empl.salary = empl.salary - empl.salary/10.0 ;
+                    empl.cut(empl.salary/10.0) ;
                 }
             }
         }
