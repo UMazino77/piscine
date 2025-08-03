@@ -58,23 +58,28 @@ pub fn nbr_of_employees(mall : &Mall, ) -> usize {
 
 pub fn check_for_securities(mall :  &mut Mall,guards :HashMap<String, Guard>) -> usize {
     let mut nb = mall.guards.len() as u64;
+    // println!("{nb}  <<<<======");
     let mut area = 0;
     for floor in mall.floors.values(){
-        for store in floor.stores.values() {
-            area += store.square_meters.clone() ;
-        }
+        area += floor.size_limit.clone() ;
     }
-    if  nb < (area + 199) / 200 {
+
+    // println!("{area}  <<<<======");
+
+
+    if  nb < (area+199) / 200 {
         for (name, guard) in guards {
-            if nb >= (area + 199) / 200{
+            if nb >= (area+199) / 200{
                 break;
             }
             mall.hire_guard(name, guard);
             nb += 1 ;
         }
     }  
+
+    // println!("=====>>>>>    {nb}");
     
-    nb as usize
+    mall.guards.len()
 }
 
 pub fn cut_or_raise( mall : &mut Mall) -> usize {
