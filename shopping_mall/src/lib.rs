@@ -21,9 +21,9 @@ pub fn biggest_store(mall : &Mall) -> (&str, Store) {
     (&name,strr.unwrap())
 }
 
-pub fn highest_paid_employee(mall : &Mall) -> Vec<(&str,Employee)> {
+pub fn highest_paid_employee(mall : &Mall) -> Vec<(&str,&Employee)> {
     let mut max = 0.000001;
-    let mut bb : Vec<(String,Employee)> = vec![] ;
+    let mut bb : Vec<(&str,&Employee)> = vec![] ;
      for floor in mall.floors.values() {
         for store in floor.stores.values() {
             for employee in store.employees.values() {
@@ -38,7 +38,7 @@ pub fn highest_paid_employee(mall : &Mall) -> Vec<(&str,Employee)> {
         for store in floor.stores.values() {
             for (name, employee) in &store.employees {
                 if employee.salary == max {
-                    bb.push((name.as_str(), employee));
+                    bb.push((name.as_str(), &employee));
                 }
             }
         }
