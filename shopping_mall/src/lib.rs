@@ -6,7 +6,6 @@ use std::collections::HashMap;
 pub fn biggest_store(mall : &Mall) -> (String, Store) {
     let mut max_area = 0;
     let mut name = String::new() ;
-    // let empl = Employee {age: 0, working_hours: (0, 0),  salary: 0.0};
     let aa : HashMap<String, Employee> = Default::default() ;
     let mut strr = Store::new(aa, 0);
     for floor in mall.floors.values(){
