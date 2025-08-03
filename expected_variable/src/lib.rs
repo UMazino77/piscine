@@ -1,14 +1,20 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+use edit_distance::edit_distance;
+use convert_case::{Case, Casing};
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub fn expected_variable(str1 : &str , str2 : &str)-> Option<String> {
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    if (!str1.is_case(Case::Camel) && !str2.is_case(Case::Camel)) && (!str1.is_case(Case::Snake) && !str2.is_case(Case::Snake)) && (!str1.is_case(Case::Pascal) && !str2.is_case(Case::Pascal)) {
+        println!("{}", str1);
+        return None ;
     }
+
+    let aa = str1.to_lowercase() ;
+    let bb = str2.to_lowercase() ;
+
+    let a = edit_distance(&aa, &bb);
+    let b = 100 - 100*a / str2.len() ;
+    if b < 50 {
+       return  None ;
+    }
+    Some(format!("{b}%"))
 }
