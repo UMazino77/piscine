@@ -74,7 +74,7 @@ pub fn check_for_securities(mall :  &mut Mall,guards :HashMap<String, Guard>) ->
         }
     }  
     
-    nb
+    nb as usize
 }
 
 pub fn cut_or_raise( mall : &mut Mall) -> usize {
