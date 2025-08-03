@@ -21,7 +21,7 @@ pub fn biggest_store(mall : &Mall) -> (&str, &Store) {
 }
 
 pub fn highest_paid_employee(mall : &Mall) -> Vec<(&str,&Employee)> {
-    let mut max = 0.000001;
+    let mut max = f64::MIN;
     let mut bb : Vec<(&str,&Employee)> = vec![] ;
      for floor in mall.floors.values() {
         for store in floor.stores.values() {
