@@ -13,14 +13,11 @@ pub fn expected_variable(str1 : &str , str2 : &str)-> Option<String> {
         return None ;
     }
 
-    let a = edit_distance(&aa, &bb);
-    let b = 100 - 100*a / str2.len() ;
+    let a = edit_distance(&aa, &bb) as i32;
+    // println!(" ------   {a}    ===   {aa}     ====    {bb}");
+    let b = 100 - 100*a / str2.len() as i32 ;
     if b < 50 {
        return  None ;
     }
     Some(format!("{b}%"))
-}
-
-pub fn normal (sss : &str) -> bool {
-    !sss.contains('_') && !sss.contains('-') && sss.chars().all(|c| c.is_lowercase() || c.is_numeric())
 }
