@@ -53,7 +53,7 @@ pub fn nbr_of_employees(mall : &Mall, ) -> usize {
     a + mall.guards.len()
 }
 
-pub fn check_for_securities(mall :  &mut Mall,mut guards :HashMap<String, Guard>) -> usize {
+pub fn check_for_securities(mall :  &mut Mall,guards :HashMap<String, Guard>) -> usize {
     let nb = guards.len();
     let mut area = 0;
     for floor in mall.floors.values(){
