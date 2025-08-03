@@ -64,7 +64,7 @@ pub fn check_for_securities(mall :  &mut Mall,guards :HashMap<String, Guard>) ->
             area += store.square_meters.clone() ;
         }
     }
-    if  nb <= (area / 200) + 1 ; {
+    if  nb <= (area / 200) + 1 {
         for (name, guard) in guards {
             if nb > area/200 +1{
                 break;
