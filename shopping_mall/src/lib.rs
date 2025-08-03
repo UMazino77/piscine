@@ -6,19 +6,18 @@ use std::collections::HashMap;
 pub fn biggest_store(mall : &Mall) -> (&str, &Store) {
     let mut max_area = 0;
     let mut name = "" ;
-    let aa : HashMap<String, Employee> = Default::default() ;
     let mut strr = None;
     for floor in mall.floors.values(){
         for (key,store) in &floor.stores {
             if store.square_meters >= max_area {
                 max_area = store.square_meters.clone();
-                strr = Some(&store)  ;
-                name = *key.clone() ;
+                strr = Some(store);
+                name = key ;
             }
         }
     }
 
-    (&name,strr.unwrap())
+    (&name,&(strr.unwrap()))
 }
 
 pub fn highest_paid_employee(mall : &Mall) -> Vec<(&str,&Employee)> {
