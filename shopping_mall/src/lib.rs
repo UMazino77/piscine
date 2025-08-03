@@ -3,7 +3,7 @@ pub use mall::* ;
 use std::collections::HashMap;
 
 
-pub fn biggest_store(mall : &Mall) -> (String, Store) {
+pub fn biggest_store(mall : &Mall) -> (&str, Store) {
     let mut max_area = 0;
     let mut name = String::new() ;
     let aa : HashMap<String, Employee> = Default::default() ;
@@ -12,29 +12,33 @@ pub fn biggest_store(mall : &Mall) -> (String, Store) {
         for (key,store) in &floor.stores {
             if store.square_meters >= max_area {
                 max_area = store.square_meters.clone();
-                strr = store.clone()  ;
+                strr = Some(store)  ;
                 name = (*key.clone()).to_owned() ;
             }
         }
     }
 
-    (name,strr)
+    (name,strr.unwrap())
 }
 
-pub fn highest_paid_employee(mall : &Mall) -> Vec<(String,Employee)> {
+pub fn highest_paid_employee(mall : &Mall) -> Vec<(&str,Employee)> {
     let mut max = f64::MIN;
     let mut bb : Vec<(String,Employee)> = vec![] ;
-    for floor in mall.floors.values(){
+     for floor in mall.floors.values() {
         for store in floor.stores.values() {
-            for (key,empl) in &store.employees {
-                if empl.salary >= max {
-                    if empl.salary == max {
-                        bb.push(((*key.clone()).to_owned() ,*empl)) ;
-                    } else {
-                        bb.clear() ;
-                        bb.push(((*key.clone()).to_owned(), *empl)) ;
-                    }
-                    max = empl.salary.clone();
+            for employee in store.employees.values() {
+                if employee.salary > max {
+                    max = employee.salary;
+                }
+            }
+        }
+    }
+    
+    for floor in mall.floors.values() {
+        for store in floor.stores.values() {
+            for (name, employee) in &store.employees {
+                if employee.salary == max {
+                    bb.push((name.as_str(), employee));
                 }
             }
         }
@@ -61,10 +65,12 @@ pub fn check_for_securities(mall :  &mut Mall,guards :HashMap<String, Guard>) ->
             area += store.square_meters.clone() ;
         }
     }
-    if area / (nb as u64) < 200 {
-        mall.hire_guard("mohamed atmani", Guard{age: 22 , years_experience : 1}) ;
-        return nb+1 ;
-    }
+    for (name, guard) in guards {
+            if mall.guards.len()-1 as u64 > area/200 {
+                break;
+            }
+            mall.hire_guard(name, guard);
+        }
     nb
 }
 
