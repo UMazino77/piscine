@@ -5,7 +5,7 @@ pub fn search(array: &[i32], key: i32) -> Option<usize> {
             ii = i as i32 ;
         }
     }
-    if ii > 0 {
+    if ii >= 0 {
         return Some(ii as usize);
     }
     None
