@@ -20,12 +20,18 @@ impl Color {
             self.g = first ;
         }
 
-        if self.b == fibst {
+        if self.b == first {
             self.b = second ;
         } else if self.b == second {
             self.b = first ;
         }
+
+        if self.a == first {
+            self.a = second ;
+        } else if self.a == second {
+            self.a = first ;
+        }
+        self
     }
-    
-    Self
+
 }
