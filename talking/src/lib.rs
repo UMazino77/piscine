@@ -21,7 +21,7 @@ pub fn is_all_upper(text : &str, yell : bool ) -> bool {
     for i in text.chars() {
         if i.is_ascii_alphanumeric() && (!i.is_ascii_uppercase() && (!yell || !i.is_ascii_digit())) {
             // println!("{text}");
-            println!("------   {i}  +++++");
+            // println!("------   {i}  +++++");
             return false ;
         }
     }
