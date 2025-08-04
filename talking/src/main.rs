@@ -7,3 +7,4 @@ fn main() {
     println!("{:?}", talking("something"));
     println!("{:?}", talking(""));
 }
+

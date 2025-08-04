@@ -12,12 +12,14 @@ pub fn talking(text: &str) -> &str {
         return "There is no need to yell, calm down!"
     }
 
+    // println!("{text}") ;
+
     "Interesting"
 }
 
 pub fn is_all_upper(text : &str) -> bool {
     for i in text.chars() {
-        if i.is_ascii_alphabetic() && !i.is_ascii_uppercase() {
+        if i.is_ascii_alphanumeric() && !i.is_ascii_uppercase() {
             return false ;
         }
     }
