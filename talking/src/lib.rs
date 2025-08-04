@@ -19,7 +19,7 @@ pub fn talking(text: &str) -> &str {
 
 pub fn is_all_upper(text : &str) -> bool {
     for i in text.chars() {
-        if i.is_ascii_alphanumeric() && !i.is_ascii_uppercase() {
+        if i.is_ascii_alphanumeric() && (!i.is_ascii_uppercase() || i.is_ascii_digit()) {
             return false ;
         }
     }
