@@ -24,6 +24,9 @@ pub fn spell(n: u64) -> String {
             }
             m = m - (m/10 * 10) ;
         }
+        if m == 0 {
+            break ;
+        }
         s = format!("{s}{} ",to(m%10));
         m/=10 ;
     }
@@ -32,6 +35,7 @@ pub fn spell(n: u64) -> String {
 
 pub fn to(n : u64) -> &'static str {
     return match n {
+        0 => "zero" ,
         1 => "one",
         2 => "two",
         3 => "three",
