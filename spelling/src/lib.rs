@@ -1,13 +1,17 @@
 pub fn spell(n: u64) -> String {
     let mut m = n ;
     let mut s = String::new() ;
+    if n ==0 {
+        return String::from("zero");
+    }
     while m > 0 {
         if m >= 1000000 {
-            s = format!("{s}{} milion ",to(m/1000000));
+            s = format!("{s}{}{} million ",spell(m/1000000),to(1000000));
             m = m - (m/1000000 * 1000000) ;
         }
         if m >= 1000 {
-            s = format!("{s}{} thousand ",to(m/1000));
+            // if m/1000 
+            s = format!("{s}{} thousand ",spell(m/1000));
             m = m - (m/1000 * 1000) ;
 
         }
@@ -17,12 +21,18 @@ pub fn spell(n: u64) -> String {
         }
         if m >= 10 {
             // println!("{m}");
-            if m - m/10*10 != 0 {
-            s = format!("{s}{}-",to(m/10*10));
+            if m - m/10*10 != 0 && m >= 20{
+                s = format!("{s}{}-",to(m/10*10));
+                m = m - (m/10 * 10) ;
+                
+            } else if m-m/10*10 == 0{
+                s = format!("{s}{} ",to(m));
+                m = m - (m/10 * 10) ;
             } else {
-                s = format!("{s}{} ",to(m/10*10));
+                s = format!("{s}{} ",to(m));
+                m = 0 ;
             }
-            m = m - (m/10 * 10) ;
+            // m = m - (m/10 * 10) ;
         }
         if m == 0 {
             break ;
@@ -30,12 +40,11 @@ pub fn spell(n: u64) -> String {
         s = format!("{s}{} ",to(m%10));
         m/=10 ;
     }
-    s
+    s.trim().to_owned()
 }
 
 pub fn to(n : u64) -> &'static str {
     return match n {
-        0 => "zero" ,
         1 => "one",
         2 => "two",
         3 => "three",
@@ -55,7 +64,7 @@ pub fn to(n : u64) -> &'static str {
         17 => "seventeen",
         18 => "eighteen",
         19 => "nineteen",
-        20 => "twwenty",
+        20 => "twenty",
         30 => "thirty",
         40 => "forty",
         50 => "fifty",
@@ -65,7 +74,7 @@ pub fn to(n : u64) -> &'static str {
         90 => "ninety",
         100 => "hundred",
         1000 => "thousand",
-        100000 => "milion",
-        _ => unreachable!()
+        100000 => "million",
+        _ => ""
     }
 }
