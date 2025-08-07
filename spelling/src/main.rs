@@ -2,5 +2,5 @@ use spelling::*;
 
 fn main() {
     println!("{}", spell(348));
-    println!("{}", spell(1000000));
+    println!("{}", spell(7880454));
 }
