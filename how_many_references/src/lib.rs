@@ -15,12 +15,13 @@ impl Node {
 
     pub fn rm_all_ref(&mut self, element: Rc<String>) {
         let mut i = 0;
-        self.ref_list.clone().into_iter().for_each(|x| {
-            if x == element {
+        for ii in 0..self.ref_list.len() {
+            if self.ref_list[i] == element {
                 self.ref_list.remove(i);
-                i+=1 ;
+            } else {
+                i+=1
             }
-        })
+        }
     }
 }
 
