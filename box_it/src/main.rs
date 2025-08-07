@@ -15,3 +15,4 @@ fn main() {
 
     // As with everything related to regular Rust memory management, both the `Vec` and the `Box`es will be properly dropped when out of scope and freed, ensuring no leaks
 }
+

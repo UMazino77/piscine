@@ -28,7 +28,7 @@ impl GameSession {
 
     pub fn update_score(&mut self, user_name: &str) {
         // println!("{:?} =====>  {}", self, user_name);
-        if self.p1.1 + self.p2.1 < self.nb_games {
+        if self.p1.1 + self.p2.1 < self.nb_games && self.p1.1 <= self.nb_games/2 && self.p2.1 <= self.nb_games/2 {
             if self.p1.0 == user_name {
                 self.p1.1 += 1;
             } else if self.p2.0 == user_name {
