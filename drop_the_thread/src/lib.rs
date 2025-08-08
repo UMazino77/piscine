@@ -39,10 +39,11 @@ impl ThreadPool {
     }
 
     pub fn drop_thread(&self, id: usize) {
-        if id < self.states.borrow().len() && self.states.borrow_mut()[id] != true {
-            self.states.borrow_mut()[id] = true;
-            self.drops.set(self.drops.get() + 1);
+        if self.is_dropped(id) {
+            panic!("{} is already dropped", id);
         }
+        self.states.borrow_mut()[id] = true;
+        self.drops.set(self.drops.get() + 1);
     }
 }
 
@@ -53,12 +54,14 @@ impl<'a> Thread<'a> {
     }
 
     pub fn skill(&self) {
-        self.parent.drop_thread(self.pid);
+            self.parent.drop_thread(self.pid);
     }
 }
 
 impl Drop for Thread<'_> {
     fn drop(&mut self) {
-        Self::skill(self);
+        if !self.parent.is_dropped(self.pid) {
+            self.skill();
+        } 
     }
 }
