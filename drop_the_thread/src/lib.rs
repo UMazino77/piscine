@@ -40,6 +40,9 @@ impl ThreadPool {
 
     pub fn drop_thread(&self, id: usize) {
         if id < self.states.borrow().len() {
+            if self.states.borrow_mut()[id] == true {
+                panic!("the thread {id} is already dropped");
+            }
             self.states.borrow_mut()[id] = true;
             self.drops.set(self.drops.get() + 1);
         }
