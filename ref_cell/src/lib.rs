@@ -21,7 +21,7 @@ impl Tracker {
     }
 
     pub fn set_value(&self, rc: &Rc<i32>) {
-        // that was bad by me
+        // that was bad by meevent=320
         let count = Rc::strong_count(rc);
         let mut track_msgs = self.messages.borrow_mut();
         if count > self.max {
