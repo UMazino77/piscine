@@ -7,7 +7,7 @@ fn main() {
 
     // initialize the tracker, with the max number of
     // called references as 10
-    let mut track = Tracker::new(10);
+    let track = Tracker::new(10);
 
     let _v = Rc::clone(&v); // |\
     let _v = Rc::clone(&v); // | -> increase the Rc to 4 references
@@ -18,8 +18,8 @@ fn main() {
 
     let _v = Rc::clone(&v); // |\
     let _v = Rc::clone(&v); // |  -> increase the Rc to 8 references
-    // let _v = Rc::clone(&v); // | /
-    // let _v = Rc::clone(&v); // |/
+    let _v = Rc::clone(&v); // | /
+    let _v = Rc::clone(&v); // |/
 
     // this will change the tracker's inner value
     // and make a verification of how much we already used of our quota

@@ -14,16 +14,20 @@ impl Tracker {
 
     pub fn peek(&self, rc: &Rc<i32>) {
         let count = Rc::strong_count(rc);
+        let mut track_msgs = self.messages.borrow_mut();
+
         // println!("{} ====> {}", count , self.max);
-        self.messages.borrow_mut().push(format!("Info: This value would use {}% of your quota",((count as f64 /self.max as f64)* 100.) as i32 ));
+        track_msgs.push(format!("Info: This value would use {}% of your quota",((count as f64 /self.max as f64)* 100.) as i32 ));
     }
 
-    pub fn set_value(&mut self, rc: &Rc<i32>) {
+    pub fn set_value(&self, rc: &Rc<i32>) {
+        // that was bad by me
         let count = Rc::strong_count(rc);
+        let mut track_msgs = self.messages.borrow_mut();
         if count > self.max {
-            self.messages.borrow_mut().push(format!("Error: You can't go over your quota!" ));
+            track_msgs.push(format!("Error: You can't go over your quota!" ));
         } else if count >= (7*self.max) /10{
-            self.messages.borrow_mut().push(format!("Warning: You have used up over {}% of your quota!",((count as f64 / self.max as f64)*100.) as i32,));
+            track_msgs.push(format!("Warning: You have used up over {}% of your quota!",((count as f64 / self.max as f64)*100.) as i32,));
         }
     }
 }
