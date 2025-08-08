@@ -24,3 +24,4 @@ fn main() {
     println!("b: {:?}", how_many_references(&b));
     println!("c: {:?}", how_many_references(&c));
 }
+
