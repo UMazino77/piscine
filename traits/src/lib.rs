@@ -34,7 +34,7 @@ Weapons: ["knife"]
 
 impl Display for Player {
 	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-		write!(f, "{}\nStrength: {}, Score : {}, Money: {}\nWeapons: {:?}", self.name,self.strength , self.score, self.money, self.weapons)
+		write!(f, "{}\nStrength: {}, Score: {}, Money: {}\nWeapons: {:?}", self.name,self.strength , self.score, self.money, self.weapons)
 	}
 }
 
