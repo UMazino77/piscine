@@ -19,8 +19,22 @@ pub struct Meat {
 }
 
 impl Player {
-	pub fn eat<T: Food + Display>(&mut self, food: T) {
+	pub fn eat<T: Food>(&mut self, food: T) {
 		self.strength += food.gives();
+	}
+}
+
+/*
+
+player1
+Strength: 14, Score: 0, Money: 0
+Weapons: ["knife"]
+
+*/
+
+impl Display for Player {
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		write!(f, "{}\nStrength: {}, Score : {}, Money: {}\nWeapons: {:?}", self.name,self.strength , self.score, self.money, self.weapons)
 	}
 }
 
