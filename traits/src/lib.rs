@@ -50,6 +50,6 @@ impl Food for Fruit {
 
 impl Food for Meat {
     fn gives(&self) -> f64 {
-        self.fat_content.round()*9. + (self.weight_in_kg-self.fat_content).round()*4.
+        (4.+5.*self.fat_content)*self.weight_in_kg
     }
 }

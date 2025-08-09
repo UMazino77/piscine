@@ -24,3 +24,4 @@ fn main() {
 	player1.eat(steak);
 	println!("After eating a steak\n{}", player1);
 }
+
