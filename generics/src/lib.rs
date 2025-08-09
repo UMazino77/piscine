@@ -1,5 +1,5 @@
- use std::fmt::Debug;
+ use std::fmt::Display;
 
-pub fn identity(v: impl Debug) -> impl Debug {
+pub fn identity(v: impl Display) -> impl Display {
     v
 }
