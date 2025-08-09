@@ -1,5 +1,3 @@
- use std::fmt::Display;
-
-pub fn identity(v: impl Display) -> impl Display {
+pub fn identity<T>(v: T) -> T {
     v
 }
