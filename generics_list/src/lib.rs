@@ -9,20 +9,16 @@ pub struct Node<T> {
     pub next: Option<Box<Node<T>>>,
 }
 
-impl<T> List<T> {
+impl<T: std::clone::Clone> List<T> {
     pub fn new() -> List<T> {
         List{head : None}
     }
 
     pub fn push(&mut self, value: T) {
-        match &mut self.head {
-            None => self.head = Some(Node {value, next: None}),
+        match &self.head {
+            None => self.head = Some(Node {value : value, next: None}),
             Some(h) => {
-                let mut cur = h ;
-                while cur.next.is_some() {
-                    cur = cur.next.as_mut().unwrap() ; 
-                }
-                cur.next = Some(Box::new(Node {value, next: None}));
+                self.head = Some(Node {value : value, next: Some(Box::new(h.clone()))}) ;
             }
         }
     }
@@ -34,11 +30,7 @@ impl<T> List<T> {
                 self.head = None;
             },
             Some(h) => {
-                let mut cur = h;
-                while cur.next.as_ref().unwrap().next.is_some() {
-                    cur = cur.next.as_mut().unwrap();
-                } 
-                cur.next = None ;
+                self.head = Some(*((h.next.clone()).unwrap()));
             },
         }
     }

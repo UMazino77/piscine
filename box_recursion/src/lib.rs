@@ -60,7 +60,6 @@ impl WorkEnvironment {
             },
         }
         Some(name)
-        // todo!()
     }
 
     pub fn last_worker(&self) -> Option<(String, Role)> {
