@@ -1,14 +1,125 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+#[derive(Debug, PartialEq, Eq, Clone, PartialOrd, Ord)]
+pub enum Antigen {
+    A,
+    AB,
+    B,
+    O,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone)]
+enum RhFactor {
+    Positive,
+    Negative,
+}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+#[derive(PartialEq, Eq, PartialOrd)]
+pub struct BloodType {
+    pub antigen: Antigen,
+    pub rh_factor: RhFactor,
+}
+
+use std::cmp::{Ord, Ordering};
+
+use std::str::FromStr;
+
+impl FromStr for Antigen {
+    type Err = &'static str;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+       if s.contains("AB") {
+        return Ok(Antigen::AB);
+       } else if s.contains("A") {
+        return Ok(Antigen::A);
+       } else if s.contains("B") {
+        return Ok(Antigen::B);
+       } else if s.contains("O") {
+        return Ok(Antigen::O);
+       }
+       Err("type doesn't exist")
+    }
+}
+
+impl FromStr for RhFactor {
+    type Err = &'static str;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+       if s.contains("+") {
+        return Ok(RhFactor::Positive);
+       } else if s.contains("-") {
+        return Ok(RhFactor::Negative);
+       }
+       Err("type doesn't exist")
+    }
+}
+
+impl Ord for BloodType {
+    fn cmp(&self, other: &Self) -> Ordering {
+        match self.antigen.cmp(&other.antigen) {
+            Ordering::Equal => self.rh_factor.cmp(&other.rh_factor),
+            ord => ord,
+        }
+    }
+}
+
+impl FromStr for BloodType {
+    type Err = &'static str;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let antigen = Antigen::from_str(s)?;
+        let rh_factor = RhFactor::from_str(s)?;
+        Ok(BloodType { antigen, rh_factor })
+    }
+}
+
+use std::fmt::{self, Debug};
+
+impl Debug for BloodType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        if self.rh_factor == RhFactor::Positive {
+            write!(f, "{:?}+", self.antigen)
+        } else {
+            write!(f, "{:?}-", self.antigen)
+        }
+    }
+}
+
+impl BloodType {
+    pub fn can_receive_from(&self, other: &Self) -> bool {
+        match self.rh_factor {
+            RhFactor::Negative => {
+                return other.rh_factor == RhFactor::Negative && (other.antigen == self.antigen || other.antigen == Antigen::O || self.antigen == Antigen::AB)  ;
+            },
+            RhFactor::Positive => {
+                return other.rh_factor == RhFactor::Positive && (other.antigen == Antigen::O || self.antigen == Antigen::AB || other.antigen == self.antigen);
+            }
+            _ => return false,
+        }
+    }
+
+    pub fn donors(&self) -> Vec<Self> {
+        let st = "O+ A+ B+ AB+ O- A- B- AB-";
+        let mut aa = Vec::new();
+        for blood in st.split_whitespace() {
+            if let Ok(a) = BloodType::from_str(blood) {
+                if self.can_receive_from(&a) {
+                    aa.push(a);
+                }
+            }
+        }
+        aa
+    }
+
+    pub fn recipients(&self) -> Vec<BloodType> {
+        let st = "O+ A+ B+ AB+ O- A- B- AB-";
+        let mut aa = Vec::new();
+        for blood in st.split_whitespace() {
+            if let Ok(a) = BloodType::from_str(blood) {
+                if a.can_receive_from(&self) {
+                    println!("{:?} can receive from {:?}", a, self);
+                    aa.push(a);
+                }
+            }
+        }
+        aa
     }
 }
