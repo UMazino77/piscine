@@ -7,7 +7,7 @@ pub enum Antigen {
 }
 
 #[derive(Debug, PartialEq, Eq, PartialOrd, Ord, Clone)]
-enum RhFactor {
+pub enum RhFactor {
     Positive,
     Negative,
 }
@@ -92,7 +92,6 @@ impl BloodType {
             RhFactor::Positive => {
                 return other.rh_factor == RhFactor::Positive && (other.antigen == Antigen::O || self.antigen == Antigen::AB || other.antigen == self.antigen);
             }
-            _ => return false,
         }
     }
 
