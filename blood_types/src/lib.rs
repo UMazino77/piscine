@@ -26,13 +26,13 @@ impl FromStr for Antigen {
     type Err = &'static str;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-       if s.contains("AB") {
+       if &s[..s.len()-1] == "AB" {
         return Ok(Antigen::AB);
-       } else if s.contains("A") {
+       } else if &s[..s.len()-1] == "A" {
         return Ok(Antigen::A);
-       } else if s.contains("B") {
+       } else if &s[..s.len()-1] == "B" {
         return Ok(Antigen::B);
-       } else if s.contains("O") {
+       } else if &s[..s.len()-1] == "O" {
         return Ok(Antigen::O);
        }
        Err("type doesn't exist")
@@ -86,14 +86,13 @@ impl Debug for BloodType {
 impl BloodType {
     pub fn can_receive_from(&self, other: &Self) -> bool {
         println!("{:?} can receive from  {:?}", self, other);
-        match self.rh_factor {
-            RhFactor::Negative => {
-                return (self.rh_factor == RhFactor::Negative && (other.antigen == Antigen::O || self.antigen == Antigen::AB )) || other.antigen == self.antigen ;
-            },
-            RhFactor::Positive => {
-                return (self.rh_factor == RhFactor::Positive && ( self.antigen == Antigen::AB || other.antigen == self.antigen)) || other.antigen == Antigen::O || (self.antigen == Antigen::AB) ;
-            }
-        }
+        
+match self.rh_factor {
+    RhFactor::Negative => {
+        return other.rh_factor == RhFactor::Negative && (other.antigen == Antigen::O || other.antigen == self.antigen || self.antigen == Antigen::AB);},
+    RhFactor::Positive => {
+        return other.antigen == Antigen::O || other.antigen == self.antigen || self.antigen == Antigen::AB;}    
+}
     }
 
     pub fn donors(&self) -> Vec<Self> {
