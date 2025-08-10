@@ -1,8 +1,8 @@
 use blood_types::*;
 
 fn main() {
-	let blood_type: BloodType = "O+".parse().unwrap();
-	println!("recipients of O+ {:?}", blood_type.recipients());
+	let blood_type: BloodType = "A-".parse().unwrap();
+	println!("recipients of A- {:?}", blood_type.recipients());
 	// println!("donors of O+ {:?}", blood_type.donors());
 	// let another_blood_type: BloodType = "A-".parse().unwrap();
 	// println!(

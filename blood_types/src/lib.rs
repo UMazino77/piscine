@@ -85,12 +85,13 @@ impl Debug for BloodType {
 
 impl BloodType {
     pub fn can_receive_from(&self, other: &Self) -> bool {
+        println!("{:?} can receive from  {:?}", self, other);
         match self.rh_factor {
             RhFactor::Negative => {
-                return other.rh_factor == RhFactor::Negative && (other.antigen == self.antigen || other.antigen == Antigen::O || self.antigen == Antigen::AB)  ;
+                return (self.rh_factor == RhFactor::Negative && (other.antigen == Antigen::O || self.antigen == Antigen::AB )) || other.antigen == self.antigen ;
             },
             RhFactor::Positive => {
-                return other.rh_factor == RhFactor::Positive && (other.antigen == Antigen::O || self.antigen == Antigen::AB || other.antigen == self.antigen);
+                return (self.rh_factor == RhFactor::Positive && ( self.antigen == Antigen::AB || other.antigen == self.antigen)) || other.antigen == Antigen::O || (self.antigen == Antigen::AB) ;
             }
         }
     }
@@ -103,8 +104,11 @@ impl BloodType {
                 if self.can_receive_from(&a) {
                     aa.push(a);
                 }
+            } else {
+                panic!("type doesn't exist");
             }
         }
+        aa.sort();
         aa
     }
 
@@ -119,6 +123,7 @@ impl BloodType {
                 }
             }
         }
+        aa.sort();
         aa
     }
 }
