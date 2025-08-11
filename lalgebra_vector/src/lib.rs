@@ -11,15 +11,16 @@ where
     type Output = Option<Self>;
     
     fn add(self, other: Self) -> Option<Self> {
+        if self.len() != other.len() {
+            return None;
+        }
+
         let mut a = Vec::new();
         let j = min(self.len(), other.len());
         
         for i in 0..j {
             a.push(self.0[i].clone() + other.0[i].clone());
         }
-        
-        a.extend_from_slice(&self.0[j..]);
-        a.extend_from_slice(&other.0[j..]);
         
         Some(Vector(a))
     }
