@@ -8,9 +8,9 @@ impl<T: Scalar> Add for Vector<T>
 where 
     T: Add<Output = T> + Clone,
 {
-    type Output = Self;
+    type Output = Option<Self>;
     
-    fn add(self, other: Self) -> Self {
+    fn add(self, other: Self) -> Option<Self> {
         let mut a = Vec::new();
         let j = min(self.len(), other.len());
         
@@ -21,7 +21,7 @@ where
         a.extend_from_slice(&self.0[j..]);
         a.extend_from_slice(&other.0[j..]);
         
-        Vector(a)
+        Some(Vector(a))
     }
 }
 
