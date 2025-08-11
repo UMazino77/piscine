@@ -4,7 +4,9 @@ use std::ops::Add;
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct Vector<T: Scalar>(pub Vec<T>);
 
-impl<T: Scalar> Add for Vector<T> where T: Add<Output = T> + Clone,
+impl<T: Scalar> Add for Vector<T> 
+where 
+    T: Add<Output = T> + Clone,
 {
     type Output = Self;
     
@@ -33,7 +35,7 @@ impl<T: Scalar> Vector<T> {
     }
 
     pub fn dot(&self, other: &Self) -> Option<T> 
-    where
+        where
         T: Add<Output = T> + std::ops::Sub<Output = T> + std::ops::Mul<Output = T> + Copy,
     {
         if self.len() != other.len() {
