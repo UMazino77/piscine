@@ -1,4 +1,4 @@
-#[derive(Debug, clone)]
+#[derive(Debug, Clone)]
 pub struct Person<'a> {
 	pub name: &'a str,
 	pub age: u8,
