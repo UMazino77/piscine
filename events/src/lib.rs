@@ -29,7 +29,7 @@ pub enum Event<'a> {
 
 impl fmt::Display for Notification {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-		writeln!(f, "({}, {}, {})",
+		write!(f, "({}, {}, {})",
 			self.position.to_string(), self.size, self.content.truecolor(self.color.0,self.color.1,self.color.2))
 	}
 }
