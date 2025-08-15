@@ -1,7 +1,6 @@
 use chrono::Duration;
 use colored::*;
-use std::{fmt, str::FromStr};
-use std::fmt::Display;
+use std::{fmt};
 
 #[derive(Debug, Eq, PartialEq)]
 pub enum Position {
