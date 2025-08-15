@@ -63,7 +63,7 @@ impl<'a> Event <'_> {
 				size: 30,
 				color: (255, 2, 22),
 				position: Position::Top,
-				content: format!("You have {}H:{}M:{}S  left before the registration ends", duration.num_hours(),duration.num_minutes() % 60, duration.num_seconds() % 60),
+				content: format!("You have {}H:{}M:{}S left before the registration ends", duration.num_hours(),duration.num_minutes() % 60, duration.num_seconds() % 60),
 			},
 			Event::Holiday => Notification {
 				size: 25,
