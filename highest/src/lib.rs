@@ -27,6 +27,8 @@ impl <'a>Numbers<'a> {
     pub fn highest_three(&self) -> Vec<u32> {
         let mut a = self.numbers.to_owned();
         a.sort();
-        a[a.len()-3..].to_owned()
+        a = a[a.len()-3..].to_owned();
+        a.reverse();
+        a
     }
 }
