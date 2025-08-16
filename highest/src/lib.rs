@@ -26,13 +26,13 @@ impl <'a>Numbers<'a> {
 
     pub fn highest_three(&self) -> Vec<u32> {
         
-        let mut a = self.numbers.to_owned();
+        let mut a :Vec<u32>= self.numbers.to_owned();
         a.sort();
         a.reverse();
         if self.numbers.len()<3 {
-            return a.to_owned()
+            return a;
         }
-        a = a[a.len()-3..].to_owned();
+        a = a[a.len()-3..].to_vec();
         a
     }
 }
