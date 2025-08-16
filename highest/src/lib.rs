@@ -28,11 +28,12 @@ impl <'a>Numbers<'a> {
         
         let mut a :Vec<u32>= self.numbers.to_owned();
         a.sort();
-        a.reverse();
         if self.numbers.len()<3 {
+            a.reverse();
             return a;
         }
         a = a[a.len()-3..].to_vec();
+        a.reverse();
         a
     }
 }
